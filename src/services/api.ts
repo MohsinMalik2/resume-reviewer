@@ -53,108 +53,108 @@ api.interceptors.response.use(
 export const authAPI = {
   login: async (credentials: LoginRequest): Promise<AuthResponse> => {
     // Mock authentication for demo - replace with real API call
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
+    // await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
     
-    // Mock validation
-    if (credentials.email === 'demo@example.com' && credentials.password === 'password') {
-      const mockResponse: AuthResponse = {
-        user: {
-          id: 'demo-user-id',
-          email: credentials.email,
-          firstName: 'Demo',
-          lastName: 'User',
-          company: 'Demo Company',
-          role: 'HR Manager',
-          createdAt: new Date().toISOString()
-        },
-        token: 'mock-jwt-token',
-        refreshToken: 'mock-refresh-token'
-      };
+    // // Mock validation
+    // if (credentials.email === 'demo@example.com' && credentials.password === 'password') {
+    //   const mockResponse: AuthResponse = {
+    //     user: {
+    //       id: 'demo-user-id',
+    //       email: credentials.email,
+    //       firstName: 'Demo',
+    //       lastName: 'User',
+    //       company: 'Demo Company',
+    //       role: 'HR Manager',
+    //       createdAt: new Date().toISOString()
+    //     },
+    //     token: 'mock-jwt-token',
+    //     refreshToken: 'mock-refresh-token'
+    //   };
       
-      // Store tokens in cookies
-      Cookies.set('auth_token', mockResponse.token, { expires: 7 });
-      Cookies.set('refresh_token', mockResponse.refreshToken, { expires: 30 });
+    //   // Store tokens in cookies
+    //   Cookies.set('auth_token', mockResponse.token, { expires: 7 });
+    //   Cookies.set('refresh_token', mockResponse.refreshToken, { expires: 30 });
       
-      return mockResponse;
-    } else {
-      throw new Error('Invalid credentials. Use demo@example.com / password for demo.');
-    }
+    //   return mockResponse;
+    // } else {
+    //   throw new Error('Invalid credentials. Use demo@example.com / password for demo.');
+    // }
     
     // Real API call (commented out for demo)
-    // const response: AxiosResponse<AuthResponse> = await api.post('/auth/login', credentials);
-    // Cookies.set('auth_token', response.data.token, { expires: 7 });
-    // Cookies.set('refresh_token', response.data.refreshToken, { expires: 30 });
-    // return response.data;
+    const response: AxiosResponse<AuthResponse> = await api.post('/auth/login', credentials);
+    Cookies.set('auth_token', response.data.token, { expires: 7 });
+    Cookies.set('refresh_token', response.data.refreshToken, { expires: 30 });
+    return response.data;
   },
 
   register: async (userData: RegisterRequest): Promise<AuthResponse> => {
     // Mock registration for demo - replace with real API call
-    await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network delay
+    // await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network delay
     
-    const mockResponse: AuthResponse = {
-      user: {
-        id: 'new-user-id',
-        email: userData.email,
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        company: userData.company,
-        role: 'HR Professional',
-        createdAt: new Date().toISOString()
-      },
-      token: 'mock-jwt-token',
-      refreshToken: 'mock-refresh-token'
-    };
+    // const mockResponse: AuthResponse = {
+    //   user: {
+    //     id: 'new-user-id',
+    //     email: userData.email,
+    //     firstName: userData.firstName,
+    //     lastName: userData.lastName,
+    //     company: userData.company,
+    //     role: 'HR Professional',
+    //     createdAt: new Date().toISOString()
+    //   },
+    //   token: 'mock-jwt-token',
+    //   refreshToken: 'mock-refresh-token'
+    // };
     
-    // Store tokens in cookies
-    Cookies.set('auth_token', mockResponse.token, { expires: 7 });
-    Cookies.set('refresh_token', mockResponse.refreshToken, { expires: 30 });
+    // // Store tokens in cookies
+    // Cookies.set('auth_token', mockResponse.token, { expires: 7 });
+    // Cookies.set('refresh_token', mockResponse.refreshToken, { expires: 30 });
     
-    return mockResponse;
+    // return mockResponse;
     
     // Real API call (commented out for demo)
-    // const response: AxiosResponse<AuthResponse> = await api.post('/auth/register', userData);
-    // Cookies.set('auth_token', response.data.token, { expires: 7 });
-    // Cookies.set('refresh_token', response.data.refreshToken, { expires: 30 });
-    // return response.data;
+    const response: AxiosResponse<AuthResponse> = await api.post('/auth/register', userData);
+    Cookies.set('auth_token', response.data.token, { expires: 7 });
+    Cookies.set('refresh_token', response.data.refreshToken, { expires: 30 });
+    return response.data;
   },
 
   logout: async (): Promise<void> => {
     // Mock logout for demo
-    await new Promise(resolve => setTimeout(resolve, 500));
-    Cookies.remove('auth_token');
-    Cookies.remove('refresh_token');
+    // await new Promise(resolve => setTimeout(resolve, 500));
+    // Cookies.remove('auth_token');
+    // Cookies.remove('refresh_token');
     
     // Real API call (commented out for demo)
-    // try {
-    //   await api.post('/auth/logout');
-    // } finally {
-    //   Cookies.remove('auth_token');
-    //   Cookies.remove('refresh_token');
-    // }
+    try {
+      await api.post('/auth/logout');
+    } finally {
+      Cookies.remove('auth_token');
+      Cookies.remove('refresh_token');
+    }
   },
 
   getCurrentUser: async (): Promise<User> => {
     // Mock get current user for demo
-    await new Promise(resolve => setTimeout(resolve, 500));
+    // await new Promise(resolve => setTimeout(resolve, 500));
     
-    const token = Cookies.get('auth_token');
-    if (!token) {
-      throw new Error('No authentication token');
-    }
+    // const token = Cookies.get('auth_token');
+    // if (!token) {
+    //   throw new Error('No authentication token');
+    // }
     
-    return {
-      id: 'demo-user-id',
-      email: 'demo@example.com',
-      firstName: 'Demo',
-      lastName: 'User',
-      company: 'Demo Company',
-      role: 'HR Manager',
-      createdAt: new Date().toISOString()
-    };
+    // return {
+    //   id: 'demo-user-id',
+    //   email: 'demo@example.com',
+    //   firstName: 'Demo',
+    //   lastName: 'User',
+    //   company: 'Demo Company',
+    //   role: 'HR Manager',
+    //   createdAt: new Date().toISOString()
+    // };
     
     // Real API call (commented out for demo)
-    // const response: AxiosResponse<User> = await api.get('/auth/me');
-    // return response.data;
+    const response: AxiosResponse<User> = await api.get('/auth/me');
+    return response.data;
   },
 
   refreshToken: async (): Promise<AuthResponse> => {
@@ -164,34 +164,34 @@ export const authAPI = {
     }
 
     // Mock refresh token for demo
-    await new Promise(resolve => setTimeout(resolve, 500));
+    // await new Promise(resolve => setTimeout(resolve, 500));
     
-    const mockResponse: AuthResponse = {
-      user: {
-        id: 'demo-user-id',
-        email: 'demo@example.com',
-        firstName: 'Demo',
-        lastName: 'User',
-        company: 'Demo Company',
-        role: 'HR Manager',
-        createdAt: new Date().toISOString()
-      },
-      token: 'new-mock-jwt-token',
-      refreshToken: 'new-mock-refresh-token'
-    };
+    // const mockResponse: AuthResponse = {
+    //   user: {
+    //     id: 'demo-user-id',
+    //     email: 'demo@example.com',
+    //     firstName: 'Demo',
+    //     lastName: 'User',
+    //     company: 'Demo Company',
+    //     role: 'HR Manager',
+    //     createdAt: new Date().toISOString()
+    //   },
+    //   token: 'new-mock-jwt-token',
+    //   refreshToken: 'new-mock-refresh-token'
+    // };
 
-    Cookies.set('auth_token', mockResponse.token, { expires: 7 });
-    Cookies.set('refresh_token', mockResponse.refreshToken, { expires: 30 });
+    // Cookies.set('auth_token', mockResponse.token, { expires: 7 });
+    // Cookies.set('refresh_token', mockResponse.refreshToken, { expires: 30 });
 
-    return mockResponse;
+    // return mockResponse;
     
     // Real API call (commented out for demo)
-    // const response: AxiosResponse<AuthResponse> = await api.post('/auth/refresh', {
-    //   refreshToken
-    // });
-    // Cookies.set('auth_token', response.data.token, { expires: 7 });
-    // Cookies.set('refresh_token', response.data.refreshToken, { expires: 30 });
-    // return response.data;
+    const response: AxiosResponse<AuthResponse> = await api.post('/auth/refresh', {
+      refreshToken
+    });
+    Cookies.set('auth_token', response.data.token, { expires: 7 });
+    Cookies.set('refresh_token', response.data.refreshToken, { expires: 30 });
+    return response.data;
   }
 };
 
