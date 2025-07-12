@@ -52,9 +52,8 @@ const UploadPage: React.FC = () => {
             <div className="w-24"></div>
           </div>
 
-          {/* Main Card */}
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-            {/* Job Description Section */}
+          {/* Job Description Card */}
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-8">
             <div className="p-8 border-b border-gray-200">
               <div className="flex items-center space-x-3 mb-4">
                 <Briefcase className="w-6 h-6 text-blue-600" />
@@ -67,8 +66,10 @@ const UploadPage: React.FC = () => {
                 className="w-full h-32 p-4 border border-gray-300 rounded-xl resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
+          </div>
 
-            {/* File Upload Section */}
+          {/* File Upload Card */}
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
             <div className="p-8">
               <div className="flex items-center space-x-3 mb-6">
                 <Upload className="w-6 h-6 text-blue-600" />
