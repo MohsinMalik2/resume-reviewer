@@ -200,7 +200,7 @@ export const resumeAPI = {
   processResumes: async (data: ProcessResumeRequest): Promise<ProcessResumeResponse> => {
     const formData = new FormData();
     formData.append('jobDescription', data.jobDescription);
-    formData.append('comparisonScore', Number(data.comparisonScore));
+    formData.append('comparisonScore', data.comparisonScore.toString());
     data.files.forEach((file, index) => {
       formData.append(`resumes`, file);
     });

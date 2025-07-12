@@ -121,23 +121,19 @@ class ReasoningAgent(BaseAgent):
         analysis_prompt = self._create_analysis_prompt(resume_data, job_description)
         
         try:
-            print(f"[DEBUG] Calling Gemini AI for {resume_data['filename']}")
-            # Temporarily disable AI analysis for testing
-            print(f"[DEBUG] AI analysis disabled for testing")
-            ai_analysis = self._create_fallback_ai_analysis()
+            # Get AI analysis
+            response = self.model.generate_content(analysis_prompt)
+            ai_analysis = self._parse_ai_response(response.text)
             
-            print(f"[DEBUG] Starting rule-based analysis for {resume_data['filename']}")
             # Enhance with rule-based analysis
             rule_based_analysis = self._rule_based_analysis(resume_data, job_description)
             
-            print(f"[DEBUG] Combining analyses for {resume_data['filename']}")
             # Combine AI and rule-based analysis
             final_analysis = self._combine_analyses(ai_analysis, rule_based_analysis)
             
             # Make final decision
             decision = "shortlist" if final_analysis["score"] >= comparison_score else "reject"
-            print(f"[DEBUG] Decision for {resume_data['filename']}: {decision} (score: {final_analysis['score']}, threshold: {comparison_score})")
-            
+
             return {
                 "candidate_id": resume_data["file_id"],
                 "filename": resume_data["filename"],
@@ -158,7 +154,6 @@ class ReasoningAgent(BaseAgent):
             
         except Exception as e:
             # Fallback to rule-based analysis only
-            print(f"[DEBUG] AI analysis failed for {resume_data['filename']}: {str(e)}")
             self.log_activity("AI analysis failed, using rule-based fallback", {"error": str(e)})
             return self._fallback_analysis(resume_data, job_description)
     

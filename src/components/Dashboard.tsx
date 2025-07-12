@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Filter, Upload, Users, Mail, BarChart3, Clock, CheckCircle } from 'lucide-react';
+import { Upload, Users, Mail, BarChart3, Clock, CheckCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import Header from './Header';
 
