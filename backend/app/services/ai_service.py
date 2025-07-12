@@ -18,7 +18,7 @@ def initialize_gemini():
             raise ValueError("GOOGLE_AI_API_KEY environment variable is required")
         
         genai.configure(api_key=api_key)
-        model = genai.GenerativeModel('gemini-pro')
+        model = genai.GenerativeModel('gemini-2.0-flash')
         
         print("Gemini AI initialized successfully")
         
