@@ -14,6 +14,7 @@ const ProcessingPage: React.FC = () => {
     setRejectionEmails,
     setProcessing,
     setCurrentJobId,
+    comparisonScore,
   } = useResumeContext();
 
   useEffect(() => {
@@ -24,7 +25,8 @@ const ProcessingPage: React.FC = () => {
         // Call the actual API
         const response = await resumeAPI.processResumes({
           jobDescription,
-          files: uploadedFiles
+          files: uploadedFiles,
+          comparisonScore,
         });
 
         // Set the results from API response
@@ -106,7 +108,7 @@ HR Team`
     };
 
     processResumesWithAPI();
-  }, [uploadedFiles, jobDescription, setProcessedResumes, setRejectionEmails, setProcessing, setCurrentJobId, navigate]);
+  }, [uploadedFiles, jobDescription, setProcessedResumes, setRejectionEmails, setProcessing, setCurrentJobId, navigate, comparisonScore]);
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
       <div className="bg-white p-12 rounded-2xl shadow-xl text-center max-w-md w-full mx-4">

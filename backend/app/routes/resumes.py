@@ -30,6 +30,7 @@ async def get_current_user_id(credentials: HTTPAuthorizationCredentials = Depend
 async def process_resumes(
     jobDescription: str = Form(...),
     resumes: List[UploadFile] = File(...),
+    comparisonScore: int = Form(50),
     user_id: str = Depends(get_current_user_id)
 ):
     """Process uploaded resumes using multi-agent system"""
@@ -86,7 +87,8 @@ async def process_resumes(
             "job_id": job_id,
             "user_id": user_id,
             "job_requirements": {},  # Could be extracted from job description
-            "company_info": {}  # Could be from user profile
+            "company_info": {},  # Could be from user profile
+            "comparison_score": comparisonScore
         }
         
         # Run multi-agent workflow

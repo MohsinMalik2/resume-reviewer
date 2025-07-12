@@ -19,6 +19,8 @@ interface ResumeContextType {
   currentJobId: string | null;
   setCurrentJobId: (jobId: string | null) => void;
   resetProcess: () => void;
+  comparisonScore: number;
+  setComparisonScore: (score: number) => void;
 }
 
 const ResumeContext = createContext<ResumeContextType | undefined>(undefined);
@@ -42,6 +44,7 @@ export const ResumeProvider: React.FC<ResumeProviderProps> = ({ children }) => {
   const [rejectionEmails, setRejectionEmails] = useState<RejectionEmail[]>([]);
   const [processing, setProcessing] = useState(false);
   const [currentJobId, setCurrentJobId] = useState<string | null>(null);
+  const [comparisonScore, setComparisonScore] = useState<number>(50);
 
   const resetProcess = () => {
     setJobDescription('');
@@ -66,6 +69,8 @@ export const ResumeProvider: React.FC<ResumeProviderProps> = ({ children }) => {
     currentJobId,
     setCurrentJobId,
     resetProcess,
+    comparisonScore,
+    setComparisonScore,
   };
 
   return (

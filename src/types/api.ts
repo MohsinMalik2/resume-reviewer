@@ -29,6 +29,7 @@ export interface RegisterRequest {
 
 export interface ProcessResumeRequest {
   jobDescription: string;
+  comparisonScore: number;
   files: File[];
 }
 

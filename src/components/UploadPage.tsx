@@ -11,6 +11,8 @@ const UploadPage: React.FC = () => {
     setJobDescription,
     uploadedFiles,
     setUploadedFiles,
+    comparisonScore,
+    setComparisonScore,
   } = useResumeContext();
 
   const handleFileUpload = (files: FileList | null) => {
@@ -128,7 +130,21 @@ const UploadPage: React.FC = () => {
               )}
 
               {/* Process Button */}
-              <div className="mt-8 flex justify-center">
+              <div className="mt-8 flex flex-col items-center">
+                <div className="mb-4 w-full max-w-xs">
+                  <label htmlFor="comparison-score" className="block text-sm font-medium text-gray-700 mb-2">
+                    Comparison Score (default: 50)
+                  </label>
+                  <input
+                    id="comparison-score"
+                    type="number"
+                    min={0}
+                    max={100}
+                    value={comparisonScore}
+                    onChange={e => setComparisonScore(Number(e.target.value) || 50)}
+                    className="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
                 <button
                   onClick={handleProcess}
                   disabled={!jobDescription.trim() || uploadedFiles.length === 0}

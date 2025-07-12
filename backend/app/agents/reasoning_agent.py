@@ -67,7 +67,8 @@ class ReasoningAgent(BaseAgent):
                     # Perform deep analysis on each candidate
                     analysis_result = await self._analyze_candidate(
                         resume_data, 
-                        job_description
+                        job_description,
+                        input_data.get("comparison_score", 50)
                     )
                     
                     analyzed_candidates.append(analysis_result)
@@ -111,25 +112,31 @@ class ReasoningAgent(BaseAgent):
             self.log_activity("Reasoning failed", {"error": str(e)})
             return AgentResult(success=False, error=str(e))
     
-    async def _analyze_candidate(self, resume_data: Dict[str, Any], job_description: str) -> Dict[str, Any]:
+    async def _analyze_candidate(self, resume_data: Dict[str, Any], job_description: str, comparison_score: int) -> Dict[str, Any]:
         """Perform comprehensive analysis of a single candidate"""
+        
+        print(f"[DEBUG] Starting analysis for {resume_data['filename']} with comparison_score: {comparison_score}")
         
         # Prepare analysis prompt for Gemini
         analysis_prompt = self._create_analysis_prompt(resume_data, job_description)
         
         try:
-            # Get AI analysis
-            response = self.model.generate_content(analysis_prompt)
-            ai_analysis = self._parse_ai_response(response.text)
+            print(f"[DEBUG] Calling Gemini AI for {resume_data['filename']}")
+            # Temporarily disable AI analysis for testing
+            print(f"[DEBUG] AI analysis disabled for testing")
+            ai_analysis = self._create_fallback_ai_analysis()
             
+            print(f"[DEBUG] Starting rule-based analysis for {resume_data['filename']}")
             # Enhance with rule-based analysis
             rule_based_analysis = self._rule_based_analysis(resume_data, job_description)
             
+            print(f"[DEBUG] Combining analyses for {resume_data['filename']}")
             # Combine AI and rule-based analysis
             final_analysis = self._combine_analyses(ai_analysis, rule_based_analysis)
             
             # Make final decision
-            decision = "shortlist" if final_analysis["score"] >= 75 else "reject"
+            decision = "shortlist" if final_analysis["score"] >= comparison_score else "reject"
+            print(f"[DEBUG] Decision for {resume_data['filename']}: {decision} (score: {final_analysis['score']}, threshold: {comparison_score})")
             
             return {
                 "candidate_id": resume_data["file_id"],
@@ -151,6 +158,7 @@ class ReasoningAgent(BaseAgent):
             
         except Exception as e:
             # Fallback to rule-based analysis only
+            print(f"[DEBUG] AI analysis failed for {resume_data['filename']}: {str(e)}")
             self.log_activity("AI analysis failed, using rule-based fallback", {"error": str(e)})
             return self._fallback_analysis(resume_data, job_description)
     

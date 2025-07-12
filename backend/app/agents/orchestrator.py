@@ -69,7 +69,8 @@ class AgentOrchestrator:
             reasoning_result = await self.reasoning_agent.process({
                 "extracted_resumes": extraction_result.data["extracted_resumes"],
                 "job_description": input_data["job_description"],
-                "job_requirements": input_data.get("job_requirements", {})
+                "job_requirements": input_data.get("job_requirements", {}),
+                "comparison_score": input_data.get("comparison_score", 50)
             })
             
             if not reasoning_result.success:
