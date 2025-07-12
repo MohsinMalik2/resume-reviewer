@@ -18,9 +18,7 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/dashboard" className="flex items-center space-x-3">
-            <div className="bg-blue-600 p-2 rounded-lg">
-              <Filter className="w-6 h-6 text-white" />
-            </div>
+            <img src="asset/logo-dark.png" alt="logo" className="w-6 h-6" />
             <span className="text-xl font-bold text-gray-900">Auto Screener</span>
           </Link>
 

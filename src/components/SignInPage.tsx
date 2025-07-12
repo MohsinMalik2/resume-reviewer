@@ -48,9 +48,7 @@ const SignInPage: React.FC = () => {
         {/* Header */}
         <div className="text-center">
           <div className="flex items-center justify-center space-x-3 mb-6">
-            <div className="bg-blue-600 p-3 rounded-xl">
-              <Filter className="w-8 h-8 text-white" />
-            </div>
+            <img src="asset/logo-dark.png" alt="logo" className="w-10 h-10" />
             <h1 className="text-3xl font-bold text-gray-900">Auto Screener</h1>
           </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome back</h2>
@@ -166,13 +164,6 @@ const SignInPage: React.FC = () => {
                 Sign up here
               </Link>
             </p>
-            
-            {/* Demo Credentials */}
-            <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-              <p className="text-sm text-blue-800 font-medium mb-1">Demo Credentials:</p>
-              <p className="text-xs text-blue-600">Email: demo@example.com</p>
-              <p className="text-xs text-blue-600">Password: password</p>
-            </div>
           </div>
         </div>
       </div>

@@ -15,14 +15,8 @@ const Dashboard: React.FC = () => {
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
-            <div className="flex items-center justify-center space-x-3 mb-6">
-              <div className="bg-blue-600 p-4 rounded-2xl">
-                <Filter className="w-10 h-10 text-white" />
-              </div>
-              <h1 className="text-5xl font-bold text-gray-900">Auto Screener Agent</h1>
-            </div>
-            <p className="text-xl text-blue-600 mb-4">Welcome back, {user?.firstName}!</p>
-            <p className="text-2xl text-gray-600 mb-8">AI-Powered Resume Screening & Rejection Automation for Recruiters</p>
+            <p className="text-xl text-blue-600 mb-4 mt-10">Welcome back, {user?.firstName}!</p>
+            <p className="text-5xl font-bold text-gray-900 mb-8">AI-Powered Resume Screening & Rejection Automation for Recruiters</p>
             <p className="text-lg text-gray-500 max-w-3xl mx-auto">
               Transform your hiring process with intelligent automation. Upload resumes, provide job requirements, 
               and let our AI handle the screening, ranking, and rejection communications automatically.
@@ -102,7 +96,7 @@ const Dashboard: React.FC = () => {
               to="/upload"
               className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-12 py-4 rounded-xl font-semibold text-lg transition-all duration-200 transform hover:scale-105 inline-flex items-center space-x-3"
             >
-              <Filter className="w-6 h-6" />
+              <img src="asset/logo-light.png" alt="logo" className="w-6 h-6" />
               <span>Start Screening Now</span>
             </Link>
           </div>
